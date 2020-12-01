@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+{% block content %}
+<article class="main">
+    <div class="container" style="margin:0 auto; width:50%; background-color: white;">
+        <h2 style="text-align:center;">{{ object.title }}</h2>
+
+        <p class="text-muted" style="text-align:center; font-size:14px;">{{ object.date_posted|date:"D, N jS Y" }}</p>
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+    <div class="center" style="position:relative;">
+        <a class="btn btn-primary" href="{% url 'app-diary' %}">Back</a>
+        <a class="btn btn-primary" href="{% url 'diary-edit' object.id %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'diary-delete' object.id %}">Delete</a>
+    </div>
+</article>
+
+{% endblock content %}

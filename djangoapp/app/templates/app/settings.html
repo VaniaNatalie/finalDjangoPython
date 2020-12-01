@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="main">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ user_form|crispy }}
+            {{ account_form|crispy }}
+        </div>
+        <div class="text-center">
+            <input type="submit" name="update" class="btn btn-primary" value="Update">
+            <a href="{% url 'app-account' %}" name="back" class="btn btn-secondary" role="button">Back</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

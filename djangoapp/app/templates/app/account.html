@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+{% block content %}
+<div class="center">
+    <div class="media">
+        <div>
+            <img class="mr-4 mt-4" src="{{ user.account.image.url }}" style="width:130px; height:130px; border-radius:50%; border:2px solid #344960;">
+        </div>
+        <div style="color:black;">
+            <h2 style="font-family:Tahoma"><strong>{{ user.first_name }}</strong></h2>
+            <p><strong>Username</strong><br>{{ user.username }}</p>
+            <p><strong>Email</strong><br>{{ user.email }}</p>
+            <a href="{% url 'app-settings' %}" name="settings" class="btn btn-primary" role="button">Settings</a>
+            <a href="{% url 'logout' %}" name="logout" class="btn btn-secondary" role="button">Logout</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% block content %}
+<head>
+    <style>
+        .center{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            width:100%;
+        }
+    </style>
+</head>
+
+<body style="background-color: #344960; font-family:tahoma; color:white;">
+    <div class="center">
+        <h1 style="text-align:center;">You have been logged out. See you soon!</h1>
+        <p style="text-align:center;">
+            <a style="color:white;" href="{% url 'login' %}" name="login">Login</a>
+        </p>
+    </div>
+</body>
+
+{% endblock content %}

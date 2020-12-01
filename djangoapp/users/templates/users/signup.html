@@ -1,0 +1,38 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'users/logo.jpg' %}" style="position:relative; top:45px; left:155px;">
+            <h1 style="color: #344960; font-family: helvetica; text-align: center; position:relative; top:35px; left:40px; width:80%; height: 80px;"><strong>The Importance of You</strong></h1>
+            <div class="col-md-9">
+                <p style="color: #344960; font-family: tahoma; text-align: center; position:relative; left:55px;">
+                    TIOU is a specially made online diary.
+                    Sometimes, the world can be against you and you feel like you're alone.
+                    TIOU is meant to be a friend, a safe place where you can vent out all your feelings and thoughts,
+                    the good and the bad without any judgement.
+                    After all, when you feel alone, it's better to have a friend right?
+                    Sometimes all you need to feel better is just a good ol' rambling.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4 offset-md-7 form">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form|crispy }}
+                </div>
+                <br>
+                <div class="text-center">
+                    <input type="submit" name="login-submit" class="btn btn-primary" value="Sign Up">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

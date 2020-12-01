@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% block content %}
+
+<article class="main">
+    <h3 style="text-align:center; color:#344860;">Do not hesitate! All your feelings and thoughts are valid.</h3>
+    <br>
+    {% for post in posts %}
+    <div class="container rounded-corners" style="text-align: center;">
+        <h2><a href="{% url 'diary-log' post.id %}" style="color: black; font-family: tahoma;">{{ post.title }}</a></h2>
+        <small class="text-muted">{{ post.date_posted|date:"D, N jS Y" }}</small>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+    <br>
+    {% endfor %}
+</article>
+
+<div style="position: fixed; right:0; bottom:0; bottom:10px; right:25px;">
+    {% if is_paginated %}
+    {% if page_obj.has_previous %}
+            <a class="btn btn-outline-dark mb-4" href="?page=1"><<</a>
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-dark mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-dark mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.next_page_number }}">></a>
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div style="right:0; bottom:0; position:fixed; bottom:85px; right:25px;">
+    <a class="btn btn-primary" href="{% url 'diary-new' %}">Create</a>
+</div>
+
+{% endblock content %}
