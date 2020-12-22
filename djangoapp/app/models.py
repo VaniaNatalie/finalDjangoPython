@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     # Attributes of the posts (title, content, date posted)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
+    title = models.CharField(max_length=100, verbose_name='A Title to Describe Today')
+    content = models.TextField(verbose_name='What Happened?')
+    diary_image = models.ImageField(default='default.jpg', blank=True, upload_to='diary_images',
+                                    verbose_name='A Memorable Pic!')
     # The date the post was created, pass the function timezone.now
     date_posted = models.DateTimeField(default=timezone.now)
 

@@ -40,14 +40,14 @@ class IndividualDiaryLogs(LoginRequiredMixin, DetailView):
 # Creating new diary logs
 class NewDiaryLogs(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'diary_image']
     template_name = 'app/newdiaryform.html'
 
 
 # Editing diary logs
 class EditDiaryLogs(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'diary_image']
     template_name = 'app/newdiaryform.html'
 
 
