@@ -6,9 +6,11 @@
         <p class="text-muted" style="text-align:center; font-size:14px;">{{ object.date_posted|date:"D, N jS Y" }}</p>
         <p class="article-content">{{ object.content }}</p>
         {% if object.diary_image.url != "/media/default.jpg" %}
-                <img style="width:100%; height:auto;" class="img-responsive" src="{{ object.diary_image.url }}">
+                <img style="width:50%; height:50%; margin-left:auto; margin-right:auto; display:block;" class="img-responsive" src="{{ object.diary_image.url }}">
         {% endif %}
+        <br>
     </div>
+    <br>
     <div style="text-align: center; position:relative;">
         <a class="btn btn-primary" href="{% url 'diary-edit' object.id %}">Edit</a>
         <a class="btn btn-danger" href="{% url 'diary-delete' object.id %}">Delete</a>
