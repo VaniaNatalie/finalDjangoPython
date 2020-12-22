@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Account
 
-#updating user's username, name and email
+
+# Updating user's username, name and email
 class UserUpdateForm(forms.ModelForm):
     username = forms.CharField(
         required=True,
@@ -21,11 +22,14 @@ class UserUpdateForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User #updating data to User database
+        # Updating data to User database with following fields
+        model = User
         fields = ['username', 'first_name', 'email']
 
-#updating account's profile image
+
+# Updating account's profile pic
 class AccountUpdateForm(forms.ModelForm):
     class Meta:
-        model = Account #updating data to Account database
+        # Updating data to Account database with following fields
+        model = Account
         fields = ['image']

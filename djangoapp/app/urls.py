@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import DiaryLogs, IndividualDiaryLogs, NewDiaryLogs, EditDiaryLogs, DeleteDiaryLogs
 
+# URL destination for each pages
 urlpatterns = [
     path('', views.home, name="app-home"),
     path('yourdiary/', DiaryLogs.as_view(), name="app-diary"),

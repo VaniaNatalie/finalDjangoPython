@@ -14,17 +14,44 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
+# Including app/urls.py
 from django.urls import path, include
-from django.contrib.auth import views as auth_views #login, logout
-from users import views as users_views #users(signup)
-from django.conf import settings #media
-from django.conf.urls.static import static #media
+
+# Login and logout
+from django.contrib.auth import views as auth_views
+
+# Users (Signup)
+from users import views as users_views
+
+# Media
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+    # Admin url path
     path('admin/', admin.site.urls),
+
+    # Signup, login and logout url paths
     path('signup/', users_views.signup, name="signup"),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html', redirect_authenticated_user=True), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html',
+                                                redirect_authenticated_user=True), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'),
+         name='logout'),
+
+    # Reset password url paths
+    path('reset-password/', auth_views.PasswordResetView.as_view(template_name='users/resetpassword.html'),
+         name='reset_password'),
+    path('reset-password/requested/',
+         auth_views.PasswordResetDoneView.as_view(template_name='users/resetpassword_requested.html'),
+         name='password_reset_done'),
+    path('reset-password-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='users/resetpassword_confirm.html'),
+         name='password_reset_confirm'),
+    path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/resetpassword_complete.html'),
+         name='password_reset_complete'),
+
+    # Including app.urls url paths
     path('', include('app.urls')),
 ]
 

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# Homepage
 @login_required
 def home(request):
     return render(request, "app/home.html")
@@ -20,7 +21,8 @@ def diary(request):
     return render(request, "app/diary.html", diary)
 '''
 
-#diary lists
+
+# Diary logs lists
 class DiaryLogs(ListView):
     model = Post
     template_name = "app/diary.html"
@@ -28,37 +30,47 @@ class DiaryLogs(ListView):
     ordering = ['-date_posted']
     paginate_by = 3
 
-#accessing individual diary logs
+
+# Accessing individual diary logs
 class IndividualDiaryLogs(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'app/diarylog.html'
 
-#creating new diary logs
+
+# Creating new diary logs
 class NewDiaryLogs(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
     template_name = 'app/newdiaryform.html'
 
-#editing diary logs
+
+# Editing diary logs
 class EditDiaryLogs(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
     template_name = 'app/newdiaryform.html'
 
-#deleting diary logs
+
+# Deleting diary logs
 class DeleteDiaryLogs(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'app/confirmdelete.html'
     success_url = '/yourdiary/'
 
+
+# About
 @login_required
 def about(request):
     return render(request, "app/about.html", {'title': 'About'})
 
+
+# Account
 @login_required
 def account(request):
     return render(request, "app/account.html", {'title': 'Account'})
 
+
+# Settings
 @login_required
 def settings(request):
     if request.method == 'POST':

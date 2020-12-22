@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'd*^v%y%$#@yej13sngp92$6t3yuf7$9i9#7l^2^v%qqjb&-yjw'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoapp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -84,7 +81,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -104,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -118,17 +113,31 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# Static file
 STATIC_URL = '/static/'
+# Making a media directory in the base dir
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# To access media from browser
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #making a media directory in the base dir
-MEDIA_URL = '/media/' #to access media from browser
+# Changing the crispy package to bootstrap4
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4' #changing the crispy package to bootstrap4
+# Modifying the route after login
+LOGIN_REDIRECT_URL = 'app-home'
 
-LOGIN_REDIRECT_URL = 'app-home' #modifying the route after login
+# Restricting the routes for @login_required
+LOGIN_URL = 'login'
 
-LOGIN_URL = 'login' #restricting the routes for @Wlogin_required
+# Syncing gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Accessing environment variables
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
