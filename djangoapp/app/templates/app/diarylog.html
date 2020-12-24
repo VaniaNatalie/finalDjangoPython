@@ -1,12 +1,18 @@
 {% extends "app/base.html" %}
 {% block content %}
 <article class="main">
-    <div class="container" style="margin:0 auto; width:50%; background-color: white;">
+    <div class="container rounded-corners" style="margin:0 auto; width:50%; background-color: white;">
         <h2 style="text-align:center;">{{ object.title }}</h2>
         <p class="text-muted" style="text-align:center; font-size:14px;">{{ object.date_posted|date:"D, N jS Y" }}</p>
         <p class="article-content">{{ object.content }}</p>
+        <br>
+        {% if object.motivation %}
+            <p style="color: #344860; text-align:center;"><strong>The thing that motivates you this day</strong></p>
+            <p>{{ object.motivation }}</p>
+        {% endif %}
         {% if object.diary_image.url != "/media/default.jpg" %}
-                <img style="width:50%; height:50%; margin-left:auto; margin-right:auto; display:block;" class="img-responsive" src="{{ object.diary_image.url }}">
+            <p style="color: #344860; text-align:center;"><strong>Memories!</strong></p>
+            <img style="width:50%; height:50%; margin-left:auto; margin-right:auto; display:block;" class="img-responsive" src="{{ object.diary_image.url }}">
         {% endif %}
         <br>
     </div>

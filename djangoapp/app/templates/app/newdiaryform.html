@@ -6,10 +6,10 @@
         <strong>How're you feeling today?</strong></h3>
     <div class="row">
         <div class="col-4 offset-md-4" >
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" style="color:#344960" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
-                    {{ form|crispy }}
+                    <strong>{{ form|crispy }}</strong>
                 </div>
                 <div class="text-center">
                     <input type="submit" name="newdiary-submit" class="btn btn-primary" value="Create Log">

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import DiaryLogs, IndividualDiaryLogs, NewDiaryLogs, EditDiaryLogs, DeleteDiaryLogs
+from .views import DiaryLogs, IndividualDiaryLogs, NewDiaryLogs, EditDiaryLogs, DeleteDiaryLogs, SearchResultView
 
 # URL destination for each pages
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('yourdiary/new/', NewDiaryLogs.as_view(), name="diary-new"),
     path('yourdiary/<int:pk>/edit/', EditDiaryLogs.as_view(), name="diary-edit"),
     path('yourdiary/<int:pk>/delete/', DeleteDiaryLogs.as_view(), name="diary-delete"),
+    path('searchresult/', SearchResultView.as_view(), name="diary-search"),
     path('about/', views.about, name="app-about"),
     path('account/', views.account, name="app-account"),
     path('account/settings/', views.settings, name="app-settings"),

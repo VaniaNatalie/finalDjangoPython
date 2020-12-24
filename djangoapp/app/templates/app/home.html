@@ -2,6 +2,9 @@
 {% block content %}
 <div class="center" style="font-family: tahoma; color: #344860;">
     <h1><strong>Welcome back {{user.first_name}}!</strong></h1>
+    <p style="text-align:center;">
+        <a style="color:white;" href="{% url 'diary-new' %}">How was your day today?</a>
+    </p>
 </div>
 
 {% endblock content %}

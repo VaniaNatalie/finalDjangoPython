@@ -50,7 +50,6 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/resetpassword_complete.html'),
          name='password_reset_complete'),
-
     # Including app.urls url paths
     path('', include('app.urls')),
 ]

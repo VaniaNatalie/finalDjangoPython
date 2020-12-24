@@ -5,6 +5,8 @@ from .forms import UserUpdateForm, AccountUpdateForm
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
+
 
 # Homepage
 @login_required
@@ -26,9 +28,27 @@ def diary(request):
 class DiaryLogs(ListView):
     model = Post
     template_name = "app/diary.html"
-    context_object_name = 'posts' #rename the variable to match in HTML
+    # Rename the variable to match in HTML
+    context_object_name = 'posts'
+    # Order from recently created to last created post
     ordering = ['-date_posted']
+    # Number of diary to display per page
     paginate_by = 3
+
+
+class SearchResultView(ListView):
+    # Similar to DiaryLogs however this is for returning search result
+    model = Post
+    template_name = "app/searchbar.html"
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        # Takes q value from submission in html
+        query = self.request.GET.get('q')
+        search_list = Post.objects.order_by('-date_posted').filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+        return search_list
 
 
 # Accessing individual diary logs
@@ -40,14 +60,14 @@ class IndividualDiaryLogs(LoginRequiredMixin, DetailView):
 # Creating new diary logs
 class NewDiaryLogs(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'diary_image']
+    fields = ['title', 'content', 'motivation', 'diary_image']
     template_name = 'app/newdiaryform.html'
 
 
 # Editing diary logs
 class EditDiaryLogs(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'content', 'diary_image']
+    fields = ['title', 'content', 'motivation', 'diary_image']
     template_name = 'app/newdiaryform.html'
 
 
@@ -55,6 +75,7 @@ class EditDiaryLogs(LoginRequiredMixin, UpdateView):
 class DeleteDiaryLogs(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'app/confirmdelete.html'
+    # If delete is successful, redirect to
     success_url = '/yourdiary/'
 
 
@@ -74,9 +95,11 @@ def account(request):
 @login_required
 def settings(request):
     if request.method == 'POST':
+        # If user submit the data to database
         user_form = UserUpdateForm(request.POST, instance=request.user)
         account_form = AccountUpdateForm(request.POST, request.FILES, instance=request.user.account)
         if user_form.is_valid() and account_form.is_valid():
+            # If data is valid
             user_form.save() and account_form.save()
             messages.success(request, f"Account successfully updated!")
             return redirect('app-account')
