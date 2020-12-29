@@ -24,7 +24,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # Redirect when calling CreateView
+    # Redirect when calling CreateView and UpdateView
     def get_absolute_url(self):
         return reverse('diary-log', kwargs={'pk': self.pk})
 
@@ -38,4 +38,6 @@ class Account(models.Model):
         return self.user.username
 
     def save(self, *args, **kwargs):
+        # Overriding save method
+        # To save new profile pic when updating
         super().save(*args, **kwargs)

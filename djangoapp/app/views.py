@@ -25,7 +25,7 @@ def diary(request):
 
 
 # Diary logs lists
-class DiaryLogs(ListView):
+class DiaryLogs(LoginRequiredMixin, ListView):
     model = Post
     template_name = "app/diary.html"
     # Rename the variable to match in HTML
@@ -36,7 +36,7 @@ class DiaryLogs(ListView):
     paginate_by = 3
 
 
-class SearchResultView(ListView):
+class SearchResultView(LoginRequiredMixin, ListView):
     # Similar to DiaryLogs however this is for returning search result
     model = Post
     template_name = "app/searchbar.html"
@@ -47,6 +47,7 @@ class SearchResultView(ListView):
         query = self.request.GET.get('q')
         search_list = Post.objects.order_by('-date_posted').filter(
             Q(title__icontains=query) | Q(content__icontains=query)
+            | Q(motivation__icontains=query)
         )
         return search_list
 

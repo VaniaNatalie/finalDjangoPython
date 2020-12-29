@@ -35,5 +35,7 @@ class SignUpForm(UserCreationForm):
     )
 
     class Meta:
-        model = User  #saving data to User model
-        fields = ['username', 'first_name', 'email', 'password1', 'password2']  #fields shown in sign up form
+        # Saving data to User model
+        model = User
+        # Fields shown in sign up form
+        fields = ['username', 'first_name', 'email', 'password1', 'password2']
